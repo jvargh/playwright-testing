@@ -1686,21 +1686,3 @@ GitHub Copilot + MCP + specialized agents represent the future of test automatio
 
 **Module Created:** February 16, 2026  
 **Version:** 3.0 (Complete with Specialized Agents Integration)  
-**Target Audience:** QA Engineers, Test Automation Engineers, DevOps Teams  
-**Delivery:** Customer Training Course  
-**Duration:** 4-6 hours hands-on practice  
-**Target Audience:** QA Engineers, Test Automation Engineers  
-**Delivery:** Customer Training Course  
-**Duration:** 4-6 hours hands-ons-on
-
-```
-Fix any failing tests and maintain test suite health
-```
-
-```
-Generate test code from created test plan
-```
-
-```
-Create comprehensive test plan for the application
-```
