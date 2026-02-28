@@ -31,65 +31,66 @@ This command will install all required packages:
 ## Architecture Overview
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                    Local Development Machine                                  │
-├─────────────────────────────────────────────────────────────────┤
-│                                                                               │
-│  Developer / CI/CD                                                           │
-│        │                                                                      │
-│        ├─➡ npm install (one time setup)                                     │
-│        │                                                                      │
-│        └─➡ npm run test:service:* (run tests)                               │
-│                │                                                              │
-│                ├─➡ cross-env sets PLAYWRIGHT_SERVICE_URL                    │
-│                │                                                              │
-│                ├─➡ playwright.service.config.ts reads .env                  │
-│                │                                                              │
-│                └─➡ Init Azure Playwright Service                            │
-│                                                                               │
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                    Local Development Machine                                │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  Developer / CI/CD                                                          │
+│        │                                                                    │
+│        ├─→ npm install (one time setup)                                     │
+│        │                                                                    │
+│        └─→ npm run test:service:* (run tests)                               │
+│                │                                                            │
+│                ├─→ cross-env sets PLAYWRIGHT_SERVICE_URL                    │
+│                │                                                            │
+│                ├─→ playwright.service.config.ts reads .env                  │
+│                │                                                            │
+│                └─→ Init Azure Playwright Service                            │
+│                                                                             │
 │  Test Suite (tests/example.spec.ts)                                         │
-│      │                                                                        │
-│      └─➡ WebSocket Connection (wss://)                                      │
-│                                                                               │
+│      │                                                                      │
+│      └─→ WebSocket Connection (wss://)                                      │
+│                                                                             │
 │  Sample App (localhost:3000)                                                │
-│      └─➡ Server ready for testing                                           │
-│                                                                               │
-└─────────────────────────────────────────────────────────────────┘
-                                  │
+│      └─→ Server ready for testing                                           │
+│                                                                             │
+└─────────────────────────────────┬───────────────────────────────────────────┘
                                   │ WebSocket (wss://)
                                   │
-        ┌──────────────────────────────────┐
+                                  │
+        ┌─────────────────────────▼──────────────────────────────┐
         │  Azure Playwright Workspaces (eastus)                  │
-        ├──────────────────────────────────┤
-        │                                                          │
+        ├────────────────────────────────────────────────────────┤
+        │                                                        │
         │  Playwright Service                                    │
-        │  ├─ Chromium Browser (Cloud)                          │
-        │  ├─ Firefox Browser (Cloud)                           │
-        │  └─ WebKit Browser (Cloud)                            │
-        │      │                                                  │
-        │      ├─➡ Load app from localhost:3000                 │
-        │      ├─➡ Execute tests in parallel                    │
-        │      └─➡ Collect traces, videos, screenshots          │
-        │                                                          │
-        │  @azure/playwright/reporter                           │
-        │  └─➡ Format and upload artifacts                      │
-        │                                                          │
-        └──────────────────────────────────┘
+        │  ├─ Chromium Browser (Cloud)                           │
+        │  ├─ Firefox Browser (Cloud)                            │
+        │  └─ WebKit Browser (Cloud)                             │
+        │      │                                                 │
+        │      ├─→ Load app from localhost:3000                  │
+        │      ├─→ Execute tests in parallel                     │
+        │      └─→ Collect traces, videos, screenshots           │
+        │                                                        │
+        │  @azure/playwright/reporter                            │
+        │  └─→ Format and upload artifacts                       │
+        │                                                        │
+        └─────────────────────────┬──────────────────────────────┘
                                   │
                                   │ Upload Artifacts
                                   │
-        ┌──────────────────────────────────┐
-        │  Azure Portal                                           │
-        ├──────────────────────────────────┤
-        │                                                          │
+        ┌─────────────────────────▼──────────────────────────────┐
+        │  Azure Portal                                          │
+        ├────────────────────────────────────────────────────────┤
+        │                                                        │
         │  Test Results Dashboard                                │
         │  ├─ HTML Reports                                       │
         │  ├─ Trace Viewer                                       │
         │  ├─ Screenshots                                        │
         │  ├─ Videos                                             │
         │  └─ Test Metrics                                       │
-        │                                                          │
-        └──────────────────────────────────┘
+        │                                                        │
+        └────────────────────────────────────────────────────────┘
 ```
 
 ### Data Flow Summary
