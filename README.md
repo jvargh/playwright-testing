@@ -422,7 +422,13 @@ Don't share more information. Please write the result to SETUP.MD.
 More detailed prompt:
 
 ```
-Generate comprehensive API and pages documentation that covers: [1] a Pages section listing all routes in the format /route -> file/path with framework pages separated; [2] an Architecture section showing the data flow between frontend, API routes, and upstream service with both an ASCII diagram and a layer-to-file mapping table; [3] an Endpoints section grouped by resource type where each endpoint includes HTTP method and path, brief description, a parameters table with columns for Param, Type, Required, and Description, at least one example request with query params, and a JSON response example; [4] supplementary sections for error responses (status code and meaning), Playwright testing code examples, and interactive API docs if applicable; [5] a file map concluding the document presented as a directory tree with inline file descriptions. Use clear markdown formatting throughout with hierarchical headers, organized tables, code blocks for examples and responses, ASCII diagrams for architecture, consistent code formatting for paths and code, examples presented before implementation details, and file trees with descriptive comments at the end. Save the output to SETUP2.MD.
+Generate comprehensive API and pages documentation that covers:
+[1] a Pages section listing all routes in the format /route -> file/path with framework pages separated;
+[2] an Architecture section showing the data flow between frontend, API routes, and upstream service with both an ASCII diagram and a layer-to-file mapping table;
+[3] an Endpoints section grouped by resource type where each endpoint includes HTTP method and path, brief description, a parameters table with columns for Param, Type, Required, and Description, at least one example request with query params, and a JSON response example;
+[4] supplementary sections for error responses (status code and meaning), Playwright testing code examples, and interactive API docs if applicable;
+[5] a file map concluding the document presented as a directory tree with inline file descriptions. Use clear markdown formatting throughout with hierarchical headers, organized tables, code blocks for examples and responses, ASCII diagrams for architecture, consistent code formatting for paths and code, examples presented before implementation details, and file trees with descriptive comments at the end.
+Save the output to SETUP2.MD.
 ```
 
 **What Copilot Does:**  
@@ -531,7 +537,21 @@ Send the output to TESTPLAN.MD
 More detailed prompt:
 
 ```
-Create a comprehensive end-to-end test plan document in markdown format (.MD) for a Playwright-based movie discovery application accessible at http://localhost:3000 with test credentials (me@outlook.com / 12345). The document should be organized into 12 major testing sections: (1) Home Page & Application Layout covering homepage load, header controls, and sidebar navigation; (2) Movie Discovery & Browsing for static categories, genre filtering, and category switching; (3) Search Functionality including basic search, multi-keyword searches, and edge cases; (4) Movie Details Page with display information, cast/credits, recommendations, and videos; (5) Person/Cast Details Page showing actor profiles and filmography; (6) User Authentication & Profile Management covering login flow, profile menu, logout, and list management; (7) Pagination & Navigation testing page controls and URL parameters; (8) Theme & UI Preferences for light/dark mode and persistence; (9) Responsive Design & Layout verification across desktop, tablet, and mobile; (10) Error Handling & Edge Cases for network errors, invalid parameters, missing data, and timeouts; (11) Accessibility & Keyboard Navigation for keyboard-only usage and focus indicators; and (12) Cross-Browser Compatibility across Chrome, Firefox, and Safari/Edge. Each of the 40+ test scenarios should include: a clear Objective explaining what is being tested, Setup instructions with prerequisites and initial configuration, numbered actionable Test Steps for testers to follow sequentially, and Expected Results detailing the successful outcome. Include a header with base URL and test credentials, add a Test Execution Summary section with prerequisite checklists, testing environment requirements, execution guidelines, and post-testing procedures, conclude with Notes & Observations covering known limitations, recommended tools, and follow-up testing needs, and maintain consistent markdown formatting throughout with clear hierarchical structure using headers, bold text for emphasis, bullet points, and numbered lists for maximum readability and practical usability by QA teams. Write the resulting output to TESTPLAN2.MD
+Create a comprehensive end-to-end test plan document in markdown format (.MD) for a Playwright-based movie discovery application accessible at http://localhost:3000 with test credentials (me@outlook.com / 12345).
+The document should be organized into 12 major testing sections:
+(1) Home Page & Application Layout covering homepage load, header controls, and sidebar navigation;
+(2) Movie Discovery & Browsing for static categories, genre filtering, and category switching;
+(3) Search Functionality including basic search, multi-keyword searches, and edge cases;
+(4) Movie Details Page with display information, cast/credits, recommendations, and videos;
+(5) Person/Cast Details Page showing actor profiles and filmography;
+(6) User Authentication & Profile Management covering login flow, profile menu, logout, and list management;
+(7) Pagination & Navigation testing page controls and URL parameters;
+(8) Theme & UI Preferences for light/dark mode and persistence;
+(9) Responsive Design & Layout verification across desktop, tablet, and mobile;
+(10) Error Handling & Edge Cases for network errors, invalid parameters, missing data, and timeouts;
+(11) Accessibility & Keyboard Navigation for keyboard-only usage and focus indicators; and
+(12) Cross-Browser Compatibility across Chrome, Firefox, and Safari/Edge. Each of the 40+ test scenarios should include: a clear Objective explaining what is being tested, Setup instructions with prerequisites and initial configuration, numbered actionable Test Steps for testers to follow sequentially, and Expected Results detailing the successful outcome. Include a header with base URL and test credentials, add a Test Execution Summary section with prerequisite checklists, testing environment requirements, execution guidelines, and post-testing procedures, conclude with Notes & Observations covering known limitations, recommended tools, and follow-up testing needs, and maintain consistent markdown formatting throughout with clear hierarchical structure using headers, bold text for emphasis, bullet points, and numbered lists for maximum readability and practical usability by QA teams.
+Write the resulting output to TESTPLAN2.MD
 ```
 
 **What Copilot Does:**
