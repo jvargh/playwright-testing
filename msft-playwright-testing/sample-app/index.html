@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Sample Movies App</title>
+    <style>
+      :root {
+        color-scheme: light;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        padding: 2rem;
+        background: #f6f7fb;
+        color: #1f2937;
+      }
+
+      header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+
+      .badge {
+        background: #111827;
+        color: #f9fafb;
+        padding: 0.25rem 0.75rem;
+        border-radius: 999px;
+        font-size: 0.85rem;
+      }
+
+      main {
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 2rem;
+        box-shadow: 0 20px 60px rgba(15, 23, 42, 0.1);
+        max-width: 900px;
+      }
+
+      ul {
+        padding-left: 1.25rem;
+      }
+
+      button {
+        background: #2563eb;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 0.6rem 1rem;
+        cursor: pointer;
+      }
+
+      button:focus {
+        outline: 3px solid #93c5fd;
+        outline-offset: 2px;
+      }
+
+      .status {
+        margin-top: 1rem;
+        font-weight: 600;
+        color: #16a34a;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Sample Movies App</h1>
+      <span class="badge" data-testid="build-badge">Azure Playwright</span>
+    </header>
+
+    <main>
+      <p data-testid="intro-text">
+        This is a tiny sample app used for Playwright Workspaces testing.
+      </p>
+
+      <h2>Now Playing</h2>
+      <ul>
+        <li>Orbit City</li>
+        <li>Solar Drift</li>
+        <li>Neon Tide</li>
+      </ul>
+
+      <button id="toggle-status" type="button">Toggle Status</button>
+      <div class="status" data-testid="status-text">Status: Ready</div>
+    </main>
+
+    <script>
+      const status = document.querySelector('[data-testid="status-text"]');
+      const button = document.getElementById('toggle-status');
+
+      button.addEventListener('click', () => {
+        status.textContent =
+          status.textContent === 'Status: Ready' ? 'Status: Updated' : 'Status: Ready';
+      });
+    </script>
+  </body>
+</html>
