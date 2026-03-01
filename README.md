@@ -160,6 +160,8 @@ INPUT CHANNELS (Choose Any)
 *   **🎭 Playwright MCP:** Executes tests, navigates the app, captures screenshots
 *   **📁 GitHub MCP:** Reads your codebase to understand structure and patterns
 
+![How it works](img/mcp.png)
+
 **Agent Naming:**
 
 *   In prompt files: `agent: playwright-planner` (no `@`)
