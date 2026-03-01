@@ -1,0 +1,10 @@
+{
+  "testing.gutterEnabled": true,
+  "playwright.reuseBrowser": true,
+  "playwright.showTrace": false,
+  "playwright.configPath": "playwright.config.ts",
+  "playwright.env": {},
+  "files.associations": {
+    "*.spec.ts": "typescript"
+  }
+}

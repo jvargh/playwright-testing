@@ -1,0 +1,68 @@
+What's the Playwright's auto waiting feature all about? #context7
+
+https://context7.com/?q=playwright
+
+##################
+
+I’m new to this project and I want to create end-to-end tests with Playwright. Can you please summarize possible pages and API routes and where they are defined? Don’t share more information. Please write the result to setup.md.
+
+##################
+
+Navigate to localhost 3000 using Playwright MCP and scan the homepage and core functionality. Please create an end-to-end testing plan with Playwright. Do not write any code yet; I just want an idea of what I could test. Use the information in #file:setup.md. Then write the test plan to testplan.md and include key actionable test scenarios. For authentication use user=me@outlook.com and password=12345. Categorize the scenarios into clear sections and sub-sections, and include a main title. For each sub-section, include: Objective (what is being tested), Setup (prerequisites and initial configuration), and Test Steps (numbered, actionable steps for testers to follow). Do not include any additional information.
+
+##################
+
+# codegen brings up PW inspector and clicking visibility creates test code. but its too manual. we need AI to automate
+npx playwright codegen http://localhost:3000/
+
+
+##################
+
+Here's a playwright test case scenario:
+```
+## Home And Navigation
+
+### Header And Sidebar Navigation
+
+Objective: Verify the header controls and sidebar navigation links are visible and route correctly.  
+Setup: Start the app at http://localhost:3000.  
+Test Steps:
+
+1.  Confirm the sidebar shows Discover and Genres sections.
+2.  Click Discover > Popular and verify the URL contains category=Popular and page=1.
+3.  Click Discover > Top Rated and verify the URL contains category=Top+Rated and page=1.
+4.  Click Discover > Upcoming and verify the URL contains category=Upcoming and page=1.
+5.  Click the app logo if present and verify it returns to the home page.
+
+### User Profile Entry Point
+
+Objective: Confirm the user profile button is visible and can be opened.  
+Setup: Start the app at http://localhost:3000.  
+Test Steps:
+
+1.  Click the User Profile button in the header.
+2.  Verify the profile menu or login entry is displayed.
+```
+
+Execute the test plan using Playwright MCP. Once you’re done, please generate a Playwright test case in tests/workshop/search.spec.ts. The test case should include the test case scenario on top as comments.
+
+
+####################
+run the generated playwright tests and if it fails fix it
+
+######### Test steps allow you to group PW actions to give cleaner output ############## 
+bring in test steps? Use Playwright's test.step() method in #file:search.spec.ts
+
+######### Page Object Models POMs ######### 
+Use Playwright MCP to run the test scenario defined in #file:search.spec.ts. Please refactor the existing tests to use proper page object models located in ‘tests/workshop/poms". Don’t change the existing functionality and don’t create new tests.
+
+Check the page object models in the #file:poms  directory and tell me if it’s using best practices? #context7
+
+######### API testing ######### 
+Using the API reference in setup.md, create a Playwright test in tests/workshop/api.spec.ts that validates the GET /api/movies/search endpoint by searching for a movie title and asserting the response status. Read the relevant API route source code to understand the expected behavior, run the test, verify it passes, and fix any failures automatically.
+
+Using the API reference in setup.md, create a Playwright test in tests/workshop/api.spec.ts that validates the GET /api/genres endpoint and asserting the response status. Ensure every genres is returned thats currently there. Read the relevant API route source code to understand the expected behavior, run the test, verify it passes, and fix any failures automatically.
+
+npx playwright test tests/workshop/api.spec.ts --project=workshop --reporter=html
+npx playwright show-report  
+
