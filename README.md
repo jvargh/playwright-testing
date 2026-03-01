@@ -1207,7 +1207,7 @@ Cover: homepage load, search, genre filtering, movie details navigation, recomme
 For each scenario, include preconditions, Given/When/Then steps, and expected assertions.
 ```
 
-**Output:** Resulting test plan gets generated `at tests/workshop/plans/movies-core-plan.md`
+**Output:** Resulting test plan gets generated at `tests/workshop/plans/movies-core-plan.md`
 
 **Agent Workflow:**
 
@@ -1251,7 +1251,7 @@ Create one spec per major scenario, use test.step() for reporting clarity, and r
 Validate selectors using Playwright MCP before finalizing code.
 ```
 
-**Output:** Resulting test suite gets generated `at tests/workshop/movies/. See tests/workshop/movies/README.md for more details.`
+**Output:** Resulting test suite gets generated at `tests/workshop/movies/`. See `tests/workshop/movies/README.md` for more details.
 
 **Agent Workflow:**
 
