@@ -15,6 +15,7 @@ This course module demonstrates how GitHub Copilot and Model Context Protocol (M
 
 *   [Course Overview](#course-overview)
 *   [Table of Contents](#table-of-contents)
+*   [Initial Setup: Microsoft Playwright Testing (Cloud Browsers)](#initial-setup-microsoft-playwright-testing-cloud-browsers)
 *   [Architecture Overview](#architecture-overview)
 *   [Demo Application Setup 🎬](#demo-application-setup-)
     *   [Installation](#installation)
@@ -63,6 +64,49 @@ This course module demonstrates how GitHub Copilot and Model Context Protocol (M
     *   [7.6 Best Practices for Agent Usage](#76-best-practices-for-agent-usage)
     *   [7.7 Using Prompt Files in This Repository](#77-using-prompt-files-in-this-repository)
     *   [7.8 Key Differences: Prompt Files vs Direct Agent Usage](#78-key-differences-prompt-files-vs-direct-agent-usage)
+
+---
+
+## Initial Setup: Microsoft Playwright Testing (Cloud Browsers)
+
+Before diving into the main course modules, you have the option to explore **Microsoft Playwright Testing** - a cloud-based browser testing service that eliminates the need for local browser management and provides scalable test execution.
+
+### 🌟 Why Microsoft Playwright Testing?
+
+[Microsoft Playwright Testing](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/overview-what-is-microsoft-playwright-workspaces) offers several advantages:
+
+*   🚀 **Instant Scale**: Run tests across 20+ parallel workers in the cloud
+*   🌍 **Cross-Platform**: Chrome, Firefox, and Safari on Windows, macOS, and Linux
+*   🔧 **Zero Maintenance**: No browser binary management or updates needed
+*   📊 **Rich Reporting**: Automatic artifact collection with Azure Portal integration
+*   💰 **Cost Effective**: Pay-per-use with no infrastructure overhead
+
+### 📋 Prerequisites
+
+The [`msft-playwright-testing/`](msft-playwright-testing/) folder contains a complete setup following the official [Microsoft quickstart guide](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/quickstart-run-end-to-end-tests?tabs=playwrightcli&pivots=playwright-test-runner):
+
+#### 📁 Quick Setup
+
+*   Azure subscription with [Microsoft Playwright Testing enabled](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/quickstart-run-end-to-end-tests)
+*   Azure CLI authentication (`az login`)
+*   Node.js 18+ and npm
+
+```
+# Navigate to the cloud testing setup
+cd msft-playwright-testing
+
+# Install dependencies (one-time setup)
+npm install
+
+# Run tests in cloud browsers (20 parallel workers)
+npm run test:service:parallel
+
+# View results in Azure Portal (automatic upload)
+# OR view local HTML report
+npm run test:report
+```
+
+Once you've explored cloud-based testing (optional), continue with the content below that focus on GitHub Copilot and MCP integration for local development workflows.
 
 ---
 

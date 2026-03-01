@@ -1,9 +1,21 @@
-# Azure Playwright Workspaces - Testing Documentation
+# Microsoft Playwright Testing - Cloud-Based Browser Testing
 
-**Date**: February 27, 2026  
-**Workspace**: `pw-movies-app-workspace` (Eastus)  
-**Workspace ID**: `[MASKED-WORKSPACE-ID]` (stored in .env, protected by .gitignore)  
-**Service URL**: `wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/[MASKED-WORKSPACE-ID]/browsers` (WebSocket)
+This project demonstrates how to run Playwright tests on cloud-based browsers using **Microsoft Playwright Testing** (formerly Azure Playwright Workspaces). This quickstart setup is based on the official [Microsoft Learn documentation](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/quickstart-run-end-to-end-tests?tabs=playwrightcli&pivots=playwright-test-runner).
+
+## 📋 Overview
+
+[Microsoft Playwright Testing](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/overview-what-is-microsoft-playwright-workspaces) provides managed cloud-based browsers for running Playwright tests with:
+
+- ✅ **Scalable Infrastructure**: Run tests in parallel across multiple cloud browsers
+- ✅ **Cross-Platform Testing**: Chrome, Firefox, and Safari on Linux, Windows, and macOS  
+- ✅ **No Browser Maintenance**: Microsoft manages browser binaries and updates
+- ✅ **Integrated Reporting**: Automatic artifact collection and Azure Portal integration
+- ✅ **Cost Efficient**: Pay-per-use model with no infrastructure overhead
+
+**Project Details**:
+- **Workspace**: `pw-movies-app-workspace` (Eastus)  
+- **Workspace ID**: `[MASKED-WORKSPACE-ID]` (stored in .env, protected by .gitignore)  
+- **Service URL**: `wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/[MASKED-WORKSPACE-ID]/browsers` (WebSocket)
 
 ---
 
@@ -301,3 +313,26 @@ msft-playwright-testing/
 **Documentation**: February 27, 2026  
 **Status**: ✅ **PRODUCTION READY**  
 **Last Updated**: Architecture diagram and data flow added
+
+---
+
+## 🔗 Related Resources
+
+- **[Microsoft Learn - Quickstart Guide](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/quickstart-run-end-to-end-tests?tabs=playwrightcli&pivots=playwright-test-runner)** - Official setup guide this project follows
+- **[Microsoft Playwright Testing Overview](https://learn.microsoft.com/en-us/azure/app-testing/playwright-workspaces/overview-what-is-microsoft-playwright-workspaces)** - Service overview and benefits
+- **[Azure Portal](https://portal.azure.com)** - View test results and manage workspaces
+- **[Playwright Documentation](https://playwright.dev/)** - Core Playwright testing framework docs
+- **[Azure CLI Documentation](https://docs.microsoft.com/en-us/cli/azure/)** - Authentication and Azure management
+
+## 🎯 Next Steps
+
+After exploring Microsoft Playwright Testing here, you can:
+
+1. **Return to Main Course**: Go back to the [main README](../README.md) to continue with GitHub Copilot and MCP integration modules
+2. **Scale Your Tests**: Use the patterns here to run your own application tests in the cloud
+3. **Integrate CI/CD**: Add these cloud tests to your deployment pipeline
+4. **Explore Advanced Features**: Try different worker configurations, test filtering, and custom reporting
+
+---
+
+> 💡 **Tip**: This setup serves as a foundation for running any Playwright test suite in the cloud. Simply replace the tests in `tests/` with your own application tests and update the `baseURL` in `playwright.config.ts` to point to your application.
