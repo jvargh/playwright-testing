@@ -162,11 +162,6 @@ INPUT CHANNELS (Choose Any)
 
 ![How it works](img/mcp.png)
 
-**Agent Naming:**
-
-*   In prompt files: `agent: playwright-planner` (no `@`)
-*   In chat messages: `@playwright-planner`
-
 ---
 
 ## Demo Application Setup 🎬

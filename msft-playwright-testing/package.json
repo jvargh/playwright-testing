@@ -7,10 +7,10 @@
     "app:start": "node sample-app/server.js",
     "test": "playwright test",
     "test:report": "playwright show-report",
-    "test:service": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/d560f082-926b-4363-97ab-8f188fb18162/browsers playwright test --config=playwright.service.config.ts",
-    "test:service:single": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/d560f082-926b-4363-97ab-8f188fb18162/browsers playwright test --config=playwright.service.config.ts --workers=1",
-    "test:service:parallel": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/d560f082-926b-4363-97ab-8f188fb18162/browsers playwright test --config=playwright.service.config.ts --workers=20",
-    "test:service:debug": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/d560f082-926b-4363-97ab-8f188fb18162/browsers playwright test --config=playwright.service.config.ts --debug"
+    "test:service": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/970c7ccd-41ed-4b7d-93c1-25a7ba61bffd/browsers playwright test --config=playwright.service.config.ts",
+    "test:service:single": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/970c7ccd-41ed-4b7d-93c1-25a7ba61bffd/browsers playwright test --config=playwright.service.config.ts --workers=1",
+    "test:service:parallel": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/970c7ccd-41ed-4b7d-93c1-25a7ba61bffd/browsers playwright test --config=playwright.service.config.ts --workers=20",
+    "test:service:debug": "cross-env PLAYWRIGHT_SERVICE_URL=wss://eastus.api.playwright.microsoft.com/playwrightworkspaces/970c7ccd-41ed-4b7d-93c1-25a7ba61bffd/browsers playwright test --config=playwright.service.config.ts --debug"
   },
   "keywords": [],
   "author": "",
