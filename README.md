@@ -134,8 +134,6 @@ This course uses a comprehensive Movies App built with Next.js and React, utiliz
 *   Responsive UI with modern React patterns
 *   Real API integration for realistic testing
 
-![Playwright Movies App](movies-app-ui-mode.jpg)
-
 ### Installation
 
 Clone the repository and install dependencies:
