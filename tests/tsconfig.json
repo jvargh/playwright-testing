@@ -16,10 +16,10 @@
     "forceConsistentCasingInFileNames": true
   },
   "include": [
-    "*.ts"
+    "./**/*"
   ],
   "exclude": [
-    "movies-app/**/*",
+    "movies-app/**",
     "node_modules"
   ]
 }

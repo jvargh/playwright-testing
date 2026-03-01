@@ -139,7 +139,7 @@ This course uses a comprehensive Movies App built with Next.js and React, utiliz
 Clone the repository and install dependencies:
 
 ```
-git clone   
+git clone https://github.com/jvargh/playwright-testing.git  
 cd playwright-movies-app  
 npm install
 ```
@@ -1077,7 +1077,7 @@ test.describe('Movies API', () => {
         const response = await request.get('/api/movies/search', {
           params: { query: 'Avengers', page: 1 }
         });
-      
+    
         expect(response.status()).toBe(200);
       });
 });
@@ -1155,14 +1155,15 @@ GitHub Copilot supports specialized agents designed for specific workflows. For 
 *   Need comprehensive test coverage analysis
 *   Want to document all possible test scenarios
 
-**How to Activate:**  
-Select the `playwright-planner` agent in GitHub Copilot, then run this concrete prompt:
+**How to Activate:** Select the `playwright-planner` agent in GitHub Copilot, then run this concrete prompt:
 
 ```
 @playwright-planner Analyze the Movies app at localhost:3000 and create a test plan at tests/workshop/plans/movies-core-plan.md.
 Cover: homepage load, search, genre filtering, movie details navigation, recommendations, pagination, and mock login flow.
 For each scenario, include preconditions, Given/When/Then steps, and expected assertions.
 ```
+
+**Output:** Resulting test plan gets generated `at tests/workshop/plans/movies-core-plan.md`
 
 **Agent Workflow:**
 
@@ -1205,6 +1206,8 @@ Select the `playwright-generator` agent in GitHub Copilot, then run this concret
 Create one spec per major scenario, use test.step() for reporting clarity, and reuse shared helpers for repeated navigation/search actions.
 Validate selectors using Playwright MCP before finalizing code.
 ```
+
+**Output:** Resulting test suite gets generated `at tests/workshop/movies/. See tests/workshop/movies/README.md for more details.`
 
 **Agent Workflow:**
 
