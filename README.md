@@ -1440,13 +1440,23 @@ Create the skill in `.github/skills/playwright-workflow/` and make it trigger au
 
 ### 8.5 Test Your Packaged Skill
 
-**Open a fresh Copilot Chat and try:**
+**Key Prompts to Use:**
 
-> "I need to create comprehensive Playwright tests for my movie search feature"
+**📋 For Test Plan Generation:**
+
+```
+Create a comprehensive test plan for my movie app using the playwright-workflow skill. Use the playwright-planner agent to explore the interface at http://localhost:3000 and create detailed test scenarios covering critical user journeys, edge cases, and error conditions.
+```
+
+**🧪 For Test Suite Generation & Execution:**
+
+```
+Generate and execute Playwright test code from my approved test plan using the playwright-workflow skill. Use the playwright-generator agent to create TypeScript test files, validate all selectors, and run the complete test suite to ensure everything works correctly.
+```
 
 **Expected Workflow:**
 
-1.  **Auto-triggers** based on "Playwright tests" mention
+1.  **Auto-triggers** based on "playwright-workflow skill" mention
 2.  **Guides planning** - Breaking down requirements into scenarios
 3.  **Enables generation** - Converting plans to robust test code
 4.  **Supports healing** - Debugging and fixing issues
