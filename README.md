@@ -39,17 +39,17 @@ This course module demonstrates how GitHub Copilot and Model Context Protocol (M
 *   [Module 2: From Manual to AI-Driven](#module-2-from-manual-to-ai-driven)
     *   [2.1 The Manual Codegen Problem](#21-the-manual-codegen-problem)
     *   [2.2 The AI-Assisted Alternative](#22-the-ai-assisted-alternative)
-    *   [2.3 Application Discovery with Copilot](#23-application-discovery-with-copilot)
+    *   [2.3 Understanding Your Codebase](#23-understanding-your-codebase)
     *   [2.4 Evaluation Criteria ✓](#24-evaluation-criteria-)
 *   [Module 3: Test Planning from Application Analysis](#module-3-test-planning-from-application-analysis)
     *   [3.1 Creating Your Comprehensive Test Plan](#31-creating-your-comprehensive-test-plan)
     *   [3.2 Evaluation Criteria ✓](#32-evaluation-criteria-)
 *   [Module 4: Rapid Test Generation from Scenarios](#module-4-rapid-test-generation-from-scenarios)
     *   [4.1 From Test Plan to Working Code](#41-from-test-plan-to-working-code)
-    *   [4.2 Evaluation Criteria](#42-evaluation-criteria)
+    *   [4.2 Key Outcomes](#42-key-outcomes)
 *   [Module 5: Test Steps for Better Reporting](#module-5-test-steps-for-better-reporting)
     *   [5.1 Using test.step() for Clarity](#51-using-teststep-for-clarity)
-    *   [5.2 Refactor to Use test.step()](#52-refactor-to-use-teststep)
+    *   [5.2 Benefits & Best Practices](#52-benefits--best-practices)
     *   [5.3 Evaluation Criteria ✓](#53-evaluation-criteria-)
 *   [Module 6: API Testing Automation](#module-6-api-testing-automation)
     *   [6.1 Understanding the API Layer](#61-understanding-the-api-layer)
@@ -524,8 +524,6 @@ GitHub Copilot + MCP provides:
 
 ---
 
-### 2.3 Application Discovery with Copilot
-
 ### 2.3 Understanding Your Codebase
 
 **Real Scenario:**  
@@ -760,7 +758,7 @@ Generate and execute a Playwright test case based on a test scenario using TESTP
 Instructions:
 1. Read the test case scenario provided in Test 3.1: Basic Search - Single Keyword.
 2. Validate the functionality by navigating to http://localhost:3000 and confirm the test scenario before proceeding.
-3. Generate a Playwright test file at tests/workshop/Basic-Search.spec.ts and ensure the file has no errors before proceeding.
+3. Generate a Playwright test file at tests/workshop/Basic-Search1.spec.ts and ensure the file has no errors before proceeding.
 4. Do not proceed until all errors in the Playwright test file are resolved.
 5. Include the complete test scenario as comments in the test code, including objective, setup, test steps, and expected results.
 6. Implement the test logic to validate all expected results.
@@ -818,36 +816,14 @@ test('should search for "Wolverine" and display relevant results', async ({ page
 **Key Patterns Used:**
 
 1.  **Scenario comments** - original test plan preserved as documentation
-2.  `**test()**` - individual test case with descriptive name
+2.  `test()` - individual test case with descriptive name
 3.  **Step comments** - inline comments for each logical step
 4.  **Auto-waiting** - `click()`, `fill()` wait automatically
 5.  **Basic structure** - simple, linear flow without advanced organization
 
-**Running Tests:**
-
-```
-## Run the test (all browsers) ##
-npx playwright test tests/workshop/Basic-Search.spec.ts
-
-## Run in headed mode (see browser) ##
-npx playwright test tests/workshop/Basic-Search.spec.ts --headed
-
-## Run and generate HTML report ##
-npx playwright test tests/workshop/Basic-Search.spec.ts --reporter=html
-
-## Open last HTML report run ##
-npx playwright show-report
-```
-
-**Expected Output:**
-
-```
-✅ should search for "Wolverine" and display relevant results (1523ms)
-```
-
 **Before moving to Module 5, verify:**
 
-*   ✅ **Test file created**: `**Basic-Search1.spec.ts**` with scenario comments and inline step comments
+*   ✅ **Test file created**: `Basic-Search1.spec.ts` with scenario comments and inline step comments
 *   ✅ **Simple linear structure** (no `test.step()` yet - that's Module 5)
 *   ✅ **All tests pass** with basic assertions working
 *   ❌ **Red flags:** Missing comments, premature use of `test.step()`, test failures
@@ -856,7 +832,7 @@ npx playwright show-report
 
 ```
 ## Run and generate HTML report ##
-npx playwright test tests/workshop/Basic-Search.spec.ts --reporter=html
+npx playwright test tests/workshop/Basic-Search1.spec.ts --reporter=html
 
 ## Open last HTML report run ##
 npx playwright show-report
@@ -867,6 +843,8 @@ Result: Test shows ✅ with simple structure, no nested steps yet
 #### **Output:**
 
 ![Test Output](img/mod4_pre_steps_output.png)
+
+---
 
 ## Module 5: Test Steps for Better Reporting
 
@@ -935,7 +913,7 @@ Module 5: ❌ should search for "Wolverine"... (2456ms)
 
 **Before moving to Module 6:**
 
-*   ✅ **File created:** `**Basic-Search2.spec.ts**` with `test.step()` organization
+*   ✅ **File created:** `Basic-Search2.spec.ts` with `test.step()` organization
 *   ✅ **Clear step names:** Descriptive, not generic
 *   ✅ **Logical grouping:** Related actions in same step
 *   ✅ **All tests pass:** Refactoring didn't break functionality
