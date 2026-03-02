@@ -64,6 +64,15 @@ This course module demonstrates how GitHub Copilot and Model Context Protocol (M
     *   [7.6 Best Practices for Agent Usage](#76-best-practices-for-agent-usage)
     *   [7.7 Using Prompt Files in This Repository](#77-using-prompt-files-in-this-repository)
     *   [7.8 Key Differences: Prompt Files vs Direct Agent Usage](#78-key-differences-prompt-files-vs-direct-agent-usage)
+*   [Module 8: Creating a Reusable Playwright Skill](#module-8-creating-a-reusable-playwright-skill-10-min)
+    *   [8.1 From Individual Components to Distributable Workflow](#81-from-individual-components-to-distributable-workflow)
+    *   [8.2 Install Skill-Creator (One-Time Setup)](#82-install-skill-creator-one-time-setup)
+    *   [8.3 Generate the Playwright Workflow Skill](#83-generate-the-playwright-workflow-skill)
+    *   [8.4 What the Skill Creator Produces](#84-what-the-skill-creator-produces)
+    *   [8.5 Test Your Packaged Skill](#85-test-your-packaged-skill)
+    *   [8.6 Validation Criteria ✓](#86-validation-criteria-)
+    *   [8.7 Distribution Strategy](#87-distribution-strategy)
+    *   [8.8 Time Investment vs. Value](#88-time-investment-vs-value)
 
 ---
 
@@ -1103,7 +1112,7 @@ Cover: homepage load, search, genre filtering, movie details navigation, recomme
 For each scenario, include preconditions, Given/When/Then steps, and expected assertions.
 ```
 
-**Output:** Resulting test plan gets generated `at tests/workshop/plans/**movies-core-plan.md**`
+**Output:** Resulting test plan gets generated `at tests/workshop/plans/movies-core-plan.md`
 
 **Agent Workflow:**
 
@@ -1283,7 +1292,7 @@ This repo already includes reusable prompt files under `.github/prompts/`:
 
 **Concrete usage examples:**
 
-**Example A: Plan tests with** `**plan.prompt.md**`
+**Example A: Plan tests with** `plan.prompt.md`
 
 ```
 /plan
@@ -1292,7 +1301,7 @@ Include happy paths, empty results, invalid query input, and pagination.
 Save as tests/workshop/plans/search-filter-plan.md
 ```
 
-**Example B: Generate suite from plan with** `**generate.prompt.md**`
+**Example B: Generate suite from plan with** `generate.prompt.md`
 
 ```
 /generate
@@ -1301,7 +1310,7 @@ Place files under tests/workshop/search/.
 Use shared utilities for repeated navigation and login steps.
 ```
 
-**Example C: Generate one targeted test with** `**generate_test.prompt.md**`
+**Example C: Generate one targeted test with** `generate_test.prompt.md`
 
 ```
 /generate_test
@@ -1309,7 +1318,7 @@ Scenario: User searches for "batman", opens first result, and sees non-empty mov
 Create tests/workshop/search/search-open-details.spec.ts with test.step() blocks.
 ```
 
-**Example D: Heal failures with** `**fix.prompt.md**`
+**Example D: Heal failures with** `fix.prompt.md`
 
 ```
 /fix
@@ -1352,5 +1361,134 @@ Do not include `@` in frontmatter. `@` is mention syntax in chat messages, not p
 *   Use **prompt files** for production team workflows and onboarding
 *   Use **direct agent chat** for exploration, quick debugging, and experimentation
 *   Combine both: start with prompt files, then do targeted follow-ups in direct agent chat
+
+---
+
+## Module 8: Creating a Reusable Playwright Skill
+
+### 8.1 From Individual Components to Distributable Workflow
+
+**Real Scenario:** You've built agents and prompts for your team. Now package them into a skill that other teams can adopt without recreating your work.
+
+**What You'll Package:**
+
+*   `playwright-planner.agent.md` - Creates comprehensive test plans
+*   `playwright-generator.agent.md` - Generates robust test code
+*   `playwright-healer.agent.md` - Debugs and fixes failing tests
+*   Supporting prompts (`plan.prompt.md`, `generate.prompt.md`, `fix.prompt.md`, `generate_test.prompt.md`)
+
+### 8.2 Install Skill-Creator (One-Time Setup)
+
+If you don't have the skill-creator available, set it up as per below instructions:
+
+*   Launch Copilot CLI: `copilot`
+*   Add marketplace: `/plugin marketplace add anthropics/skills`
+*   Install plugin: `/plugin install example-skills@anthropic-agent-skills`
+*   Exit CLI: `/exit`
+*   Add to `.vscode/settings.json`:
+
+```
+"chat.agentSkillsLocations": {
+   "~/.copilot/installed-plugins/anthropic-agent-skills/example-skills/skills": true
+}
+```
+
+*   Reload VSCode: `Cmd+Shift+P` → **Developer: Reload Window**
+
+In Copilot Chat, verify skills. Skill-creator should show up if installed.
+
+> "What skills do you have available?"
+
+### 8.3 Generate the Playwright Workflow Skill
+
+**Prompt to use:**
+
+```
+Help me create a skill called "playwright-workflow" that packages my complete Playwright testing workflow. I have these components:
+
+**Agents:**
+- #file:.github/agents/playwright-planner.agent.md - Creates test plans from requirements  
+- #file:.github/agents/playwright-generator.agent.md - Generates test code from plans
+- #file:.github/agents/playwright-healer.agent.md - Debugs and fixes failing tests
+
+**Prompts:**
+- #file:.github/prompts/plan.prompt.md - Test planning guidance
+- #file:.github/prompts/generate.prompt.md - Test generation patterns
+- #file:.github/prompts/fix.prompt.md - Test healing strategies  
+- #file:.github/prompts/generate_test.prompt.md - Additional generation templates
+
+Create the skill in `.github/skills/playwright-workflow/` and make it trigger automatically when users mention Playwright testing, test automation, or E2E testing workflows.
+```
+
+### 8.4 What the Skill Creator Produces
+
+**Generated Structure:**
+
+```
+.github/skills/playwright-workflow/
+├── SKILL.md              # Main skill with consolidated guidance
+└── README.md            # Usage documentation (optional)
+```
+
+**SKILL.md includes:**
+
+*   YAML frontmatter with triggers and description
+*   Consolidated agent instructions inline
+*   All prompt patterns embedded
+*   Auto-discovery configuration
+*   Usage examples and best practices
+
+### 8.5 Test Your Packaged Skill
+
+**Open a fresh Copilot Chat and try:**
+
+> "I need to create comprehensive Playwright tests for my movie search feature"
+
+**Expected Workflow:**
+
+1.  **Auto-triggers** based on "Playwright tests" mention
+2.  **Guides planning** - Breaking down requirements into scenarios
+3.  **Enables generation** - Converting plans to robust test code
+4.  **Supports healing** - Debugging and fixing issues
+
+### 8.6 Validation Criteria ✓
+
+**Verify these components:**
+
+*   Skill created in `.github/skills/playwright-workflow/SKILL.md`
+*   Auto-triggers on Playwright-related requests
+*   Provides unified workflow: plan → generate → heal
+*   All original agents and prompts preserved separately
+*   Other teams can copy `.github/skills/` to their repos
+
+### 8.7 Distribution Strategy
+
+**Internal Sharing:**
+
+*   Document skill prerequisites (baseURL conventions, test structure)
+*   Add to team's internal skill marketplace
+*   Create examples showing full workflow in action
+
+**vs. Individual Components:**
+
+*   **Agents/Prompts** = Building blocks for your team's iteration
+*   **Skills** = Packaged workflows for broader distribution
+*   **Both preserved** = Internal flexibility + external sharing
+
+### 8.8 Time Investment vs. Value
+
+**Time Invested:** ~10 minutes  
+**Value Created:**
+
+*   Reusable testing workflow across teams
+*   Faster onboarding for new projects
+*   Consistent test automation patterns
+*   Reduced duplication of Playwright setup work
+
+**Next Steps:**
+
+*   Share skill with other teams
+*   Gather feedback for improvements
+*   Consider contributing to company skill library
 
 ---

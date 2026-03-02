@@ -15,5 +15,8 @@
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.organizeImports": "explicit"
-  }
+  },
+  "chat.agentSkillsLocations": {
+    "~/.copilot/installed-plugins/anthropic-agent-skills/example-skills/skills": true
+  }  
 }
