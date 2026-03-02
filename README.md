@@ -756,7 +756,7 @@ If yes → Ready for Module 4. If no → Ask Copilot to refine language.
 **Prompt to use:**
 
 ```
-Generate and execute a Playwright test case based on a test scenario using TESTPLAN2.MD. Do not use Linux commands such as head or tail in PowerShell.
+Generate and execute a Playwright test case based on a test scenario using TESTPLAN2.MD. Do not use Linux commands such as head or tail since PowerShell used.
 Instructions:
 1. Read the test case scenario provided in Test 3.1: Basic Search - Single Keyword.
 2. Validate the functionality by navigating to http://localhost:3000 and confirm the test scenario before proceeding.
@@ -847,7 +847,7 @@ npx playwright show-report
 
 **Before moving to Module 5, verify:**
 
-*   ✅ **Test file created** with scenario comments and inline step comments
+*   ✅ **Test file created**: `**Basic-Search1.spec.ts**` with scenario comments and inline step comments
 *   ✅ **Simple linear structure** (no `test.step()` yet - that's Module 5)
 *   ✅ **All tests pass** with basic assertions working
 *   ❌ **Red flags:** Missing comments, premature use of `test.step()`, test failures
@@ -935,7 +935,7 @@ Module 5: ❌ should search for "Wolverine"... (2456ms)
 
 **Before moving to Module 6:**
 
-*   ✅ **File created:** `Basic-Search2.spec.ts` with `test.step()` organization
+*   ✅ **File created:** `**Basic-Search2.spec.ts**` with `test.step()` organization
 *   ✅ **Clear step names:** Descriptive, not generic
 *   ✅ **Logical grouping:** Related actions in same step
 *   ✅ **All tests pass:** Refactoring didn't break functionality
@@ -951,8 +951,7 @@ Module 5: ❌ should search for "Wolverine"... (2456ms)
 
 ### **6.1 Understanding the API Layer**
 
-**Real Scenario:**  
-UI tests only verify the frontend. You need API tests to validate contracts independently.
+**Real Scenario:** UI tests only verify the frontend. You need API tests to validate contracts independently.
 
 **Prompt to use:**
 
@@ -1126,7 +1125,7 @@ Cover: homepage load, search, genre filtering, movie details navigation, recomme
 For each scenario, include preconditions, Given/When/Then steps, and expected assertions.
 ```
 
-**Output:** Resulting test plan gets generated `at tests/workshop/plans/movies-core-plan.md`
+**Output:** Resulting test plan gets generated `at tests/workshop/plans/**movies-core-plan.md**`
 
 **Agent Workflow:**
 
@@ -1188,14 +1187,10 @@ Validate selectors using Playwright MCP before finalizing code.
 
 ```
 Generated files:
-- tests/workshop/movies/homepage.spec.ts
-- tests/workshop/movies/search.spec.ts
-- tests/workshop/movies/filter.spec.ts
-- tests/workshop/movies/details.spec.ts
-- tests/workshop/movies/recommendations.spec.ts
+- tests/workshop/movies/*.spec.ts 
 
 Optional shared helper:
-- tests/workshop/utils/movies-helpers.ts
+- tests/workshop/utils/*.ts
 ```
 
 ```
