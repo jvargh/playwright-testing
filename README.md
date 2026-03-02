@@ -751,9 +751,7 @@ If yes → Ready for Module 4. If no → Ask Copilot to refine language.
 
 ### **4.1 From Test Plan to Working Code**
 
-**Real Scenario:** Your TESTPLAN.md is approved. Now generate actual Playwright tests using Copilot.
-
-**Pre-requisite:** Ensure integrated browser is open and pointing to http://localhost:3000
+**Scenario:** Your TESTPLAN.md is approved. Now generate actual Playwright tests using Copilot.
 
 **Prompt to use:**
 
@@ -774,50 +772,56 @@ Output: A working Playwright test file with the embedded test scenario.
 **What Copilot Does:**
 
 *   Converts test plan steps into executable test code
-*   Organizes with `test.describe()` blocks
-*   Uses `test.step()` for readable reports
+*   Creates simple, linear test structure
 *   Includes scenario comments at top
+*   Uses basic Playwright assertions
 *   Discovers likely selectors (may need adjustment)
 
-**Generated Test Code Example:**
+**Generated Test Code Structure:**
 
 ```typescript
-// tests/workshop/search.spec.ts
-
 import { test, expect } from '@playwright/test';
 
 /**
- * Test Plan Scenario:
- * 
- * ### Basic Movie Search
- * Objective: Verify users can search for movies by title and see results.
- * Setup: Start app at http://localhost:3000
+ * TEST SCENARIO DOCUMENTATION
+ * ============================
+ *
+ * Objective: Verify that users can perform a basic search with a single
+ * keyword and receive relevant results.
+ *
+ * Setup:
+ * - Homepage is loaded
+ * - Search functionality is accessible in header
+ *
  * Test Steps:
- * 1. Navigate to the search page or locate search input.
- * 2. Enter "Avengers" in the search box.
- * 3. Press Enter or click Search button.
- * 4. Verify results contain movies with "Avengers" in the title.
- * 5. Verify pagination controls appear if multiple pages exist.
+ * 1. Navigate directly to search results page for "Wolverine"
+ * 2. Wait for search results to load
+ * 3. Verify we are on the search results page
+ * 4. Verify "Wolverine" movies appear in results
+ * 5. Verify search results are clickable
+ * 6. Click first movie result
+ * 7. Verify navigation to movie details page
  */
 
-test.describe('Search & Discovery', () => {
-  test.describe('Basic Movie Search', () => {
-  
-    test('should search for movies by title', async ({ page }) => {
-      await test.step('Navigate to application', async () => {
-        await page.goto('http://localhost:3000');
-      });
-  });
+test('should search for "Wolverine" and display relevant results', async ({ page }) => {
+  // Step 1: Navigate directly to the search results page
+  await page.goto('/search?searchTerm=Wolverine&page=1');
+  await page.waitForLoadState('networkidle', { timeout: 5000 });
+
+  // Step 2: Verify we are on the search results page
+  expect(page.url()).toContain('search');
+  expect(page.url()).toContain('searchTerm=Wolverine');
+...
 });
 ```
 
 **Key Patterns Used:**
 
-1.  **Scenario comments** - original test plan preserved
-2.  `**test.describe()**` - organize by feature
-3.  `**test()**` - individual test case
-4.  `**test.step()**` - labeled steps for reports
-5.  **Auto-waiting** - `click()`, `fill()` wait automatically
+1.  **Scenario comments** - original test plan preserved as documentation
+2.  `**test()**` - individual test case with descriptive name
+3.  **Step comments** - inline comments for each logical step
+4.  **Auto-waiting** - `click()`, `fill()` wait automatically
+5.  **Basic structure** - simple, linear flow without advanced organization
 
 **Running Tests:**
 
@@ -835,36 +839,18 @@ npx playwright test tests/workshop/Basic-Search.spec.ts --reporter=html
 npx playwright show-report
 ```
 
-**HTML Report Shows:**
+**Expected Output:**
 
 ```
-✅ Basic Movie Search (1523ms)
-  ✅ Navigate to application (234ms)
-  ✅ Enter search query "Avengers" (45ms)
-  ✅ Submit search (789ms)
-  ✅ Verify search results contain Avengers (123ms)
-  ✅ Verify pagination exists (56ms)
+✅ should search for "Wolverine" and display relevant results (1523ms)
 ```
-
-### **4.2 Evaluation Criteria**
 
 **Before moving to Module 5, verify:**
 
-*   **Test file created** at `tests/workshop/search.spec.ts`
-*   **Scenario comments** at the top from test-plan.md
-*   `**test.describe()**` **blocks** match test plan sections
-*   `**test.step()**` used for each logical step from plan
-*   **All tests pass** (✅ Green checkmarks in report)
-*   **HTML report readable** with clear step breakdown
-*   **No extra manual waits** added (unless documented reason)
-
-**Red Flags ❌:**
-
-*   Test file doesn't exist
-*   Scenario comments missing
-*   Tests fail without investigation or fixes
-*   Steps not grouped in `test.step()`
-*   Force: true, or lots of hard-coded `wait()` calls
+*   ✅ **Test file created** with scenario comments and inline step comments
+*   ✅ **Simple linear structure** (no `test.step()` yet - that's Module 5)
+*   ✅ **All tests pass** with basic assertions working
+*   ❌ **Red flags:** Missing comments, premature use of `test.step()`, test failures
 
 **Passing Check:**
 
@@ -876,7 +862,7 @@ npx playwright test tests/workshop/Basic-Search.spec.ts --reporter=html
 npx playwright show-report
 ```
 
-Result: All tests show ✅, no ❌
+Result: Test shows ✅ with simple structure, no nested steps yet
 
 #### **Output:**
 
@@ -886,140 +872,74 @@ Result: All tests show ✅, no ❌
 
 ### **5.1 Using test.step() for Clarity**
 
-**Real Problem:** Without organization, failing tests are hard to debug. You don't know which part failed.
+**Problem:** Basic tests from Module 4 work but when they fail, it's hard to debug which specific action failed.
 
 **Prompt to use:**
 
 ```
-Refactor `tests/workshop/Basic-Search.spec.ts` to use Playwright `test.step()` for each major action/assertion so test output is cleaner, then run the test and confirm it passes.
+Refactor `tests/workshop/Basic-Search1.spec.ts` to use Playwright `test.step()` for each major action/assertion so test output is cleaner, then run the test and confirm it passes.
 ```
 
-**What test.step() Does:**
+**Before/After Comparison:**
 
 ```typescript
-// ❌ Without test.step (fails—where? no idea)
-test('search workflow', async ({ page }) => {
-  await page.goto('http://localhost:3000');
-  await page.fill('input', 'Avengers');
-  await page.click('button');
-  const results = await page.locator('.result').count();
-  expect(results).toBeGreaterThan(0);
+// ❌ Module 4 structure (hard to debug failures)
+test('should search for "Wolverine"...', async ({ page }) => {
+  // Step 1-5: Navigate directly to the search results page
+  await page.goto('/search?searchTerm=Wolverine&page=1');
+  // Step 6: Verify we are on the search results page  
+  expect(page.url()).toContain('search');
+  // ... more linear steps with comments
 });
 
-// ✅ With test.step (clear debugging)
-test('search workflow', async ({ page }) => {
-  await test.step('Navigate to home', async () => {
-    await page.goto('http://localhost:3000');
-  });
-});
-```
-
-**HTML Report Difference:**
-
-```
-Without steps (confusing):
-  ❌ search workflow (2456ms)
-     Error: Timeout waiting for locator '.result'
-   
-With steps (clear):
-  ❌ search workflow (2456ms)
-    ✅ Navigate to home (234ms)
-    ✅ Enter search query (45ms)
-    ✅ Click search button (789ms)
-    ❌ Verify results displayed (1388ms)
-       Error: Timeout waiting for locator '.result'
-```
-
-**Benefits:**
-
-*   ✅ Instantly see which step failed
-*   ✅ Timing data per step
-*   ✅ Self-documenting test flow
-*   ✅ Better for reports and stakeholders
-
-### **5.2 Refactor to Use test.step()**
-
-**Current State:** Your `search.spec.ts` from Module 4 likely already has test.step() basics. Now refine it.
-
-**The Task:**
-
-```
-Review search.spec.ts and ensure every logical action is wrapped in test.step() with clear, descriptive names. Group related assertions.
-```
-
-**Good Grouping Pattern:**
-
-```typescript
-test('complete movie discovery workflow', async ({ page }) => {
-  
-  // Step Group 1: Setup & Navigation
-  await test.step('1. Navigate to application', async () => {
-    await page.goto('http://localhost:3000');
-    await expect(page).toHaveTitle(/Movies/i);
+// ✅ Module 5 structure (clear debugging with test.step())
+test('should search for "Wolverine"...', async ({ page }) => {
+  await test.step('Navigate to search results page', async () => {
+    await page.goto('/search?searchTerm=Wolverine&page=1');
+    await page.waitForLoadState('networkidle', { timeout: 5000 });
   });
 
+  await test.step('Verify search results page URL contains expected parameters', async () => {
+    expect(page.url()).toContain('search');
+    expect(page.url()).toContain('searchTerm=Wolverine');
+  });
+  // ... 5 more organized steps
 });
 ```
 
-**Grouping Strategy:**
+### **5.2 Benefits & Best Practices**
 
-*   **Setup & Navigation** - Load page, initial state
-*   **User Actions** - Logically related interactions (search + click)
-*   **Verification** - Related assertions grouped
-*   **Follow-up** - Additional actions
-*   **Final Verification** - Complete workflow assertions
+**HTML Report Comparison:**
 
-**DON'T Over-Granularize:**
-
-```typescript
-// ❌ TOO GRANULAR (50+ steps per test—unreadable)
-await test.step('Fill search box', async () => {
-  await page.fill('input', 'Avengers');
-});
-await test.step('Press Tab', async () => {
-  await page.press('input', 'Tab');
-});
-await test.step('Click button', async () => {
-  await page.click('button');
-});
-
-// ✅ BALANCED (5-7 steps per test—clear)
-await test.step('Search for Avengers', async () => {
-  await page.fill('input', 'Avengers');
-  await page.click('button');
-});
 ```
+Module 4: ❌ should search for "Wolverine"... (2456ms)
+         Error: Timeout waiting for locator
+         (Which part failed? No way to know!)
+
+Module 5: ❌ should search for "Wolverine"... (2456ms)
+         ✅ Navigate to search results page (234ms)
+         ✅ Verify search page loaded correctly (45ms)  
+         ❌ Verify movie results exist (1388ms)
+            Error: Timeout waiting for locator
+            (Now we know exactly where it failed!)
+```
+
+**Key Guidelines:**
+
+*   **Group related actions** (navigation + wait together)
+*   **Use descriptive names** ("Verify search results" not "Step 3")
+*   **5-7 steps per test** (not 1, not 50)
+*   **Related assertions together** (URL checks in same step)
 
 ### **5.3 Evaluation Criteria ✓**
 
-**Before moving to Module 6, verify:**
+**Before moving to Module 6:**
 
-*   **Every logical action** has a `test.step()` wrapper
-*   **Step names descriptive** (not "Step 1", use "Navigate to search")
-*   **Related actions grouped** (not separate step per click)
-*   **5-10 steps per test** (not 50, not 1)
-*   **Assertions in final step** of related group
-*   **All tests still pass** (refactoring didn't break)
-*   **HTML report readable** (steps make sense)
-
-**Red Flags ❌:**
-
-*   More than 20 steps per test
-*   Vague step names ("Do thing", "Test")
-*   Each `.click()` is its own step (too granular)
-*   Assertions separate from related actions
-*   Tests fail after refactoring
-
-**Ideal Report:**
-
-```
-✅ Complete Movie Discovery Workflow (2345ms)
-  ✅ 1. Navigate to application (234ms)
-  ✅ 2. Search for "Avengers" (789ms)
-  ✅ 3. Verify search results (123ms)
-  ✅ 4. Filter by rating (456ms)
-  ✅ 5. Verify filtered results (234ms)
-```
+*   ✅ **File created:** `Basic-Search2.spec.ts` with `test.step()` organization
+*   ✅ **Clear step names:** Descriptive, not generic
+*   ✅ **Logical grouping:** Related actions in same step
+*   ✅ **All tests pass:** Refactoring didn't break functionality
+*   ✅ **Better debugging:** HTML report shows step-by-step breakdown
 
 #### **Output:**
 
